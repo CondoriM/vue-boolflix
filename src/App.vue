@@ -8,6 +8,10 @@
         <div class="row">
           <div class="col-2 flex-column" v-for="(film,index) in films" :key="index">
             <div class="col">
+              <img class="img-fluid" :src="cover+film.poster_path" alt="">
+            </div>
+
+            <div class="col">
               {{film.original_title}}
               {{film.title}}
               {{film.original_language}}
@@ -36,6 +40,7 @@ export default {
     return{
       searchT: '',
       films: '',
+      cover: 'https://image.tmdb.org/t/p/original',
       apy_key: '626f23522e216489e48887e2688ac97f',
     }
   },
