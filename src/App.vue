@@ -4,8 +4,17 @@
     <form @submit.prevent="search">
       <input type="text" v-model="searchT">
       <button type="submit">Invia</button>
-      <div v-for="(film,index) in films" :key="index">
-        {{film.original_title}}
+      <div class="container">
+        <div class="row">
+          <div class="col-2 flex-column" v-for="(film,index) in films" :key="index">
+            <div class="col">
+              {{film.original_title}}
+              {{film.title}}
+              {{film.original_language}}
+              {{film.vote_average}}
+            </div>
+          </div>
+        </div>
       </div>
     </form>
     
