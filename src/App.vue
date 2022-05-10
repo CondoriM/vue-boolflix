@@ -13,7 +13,6 @@
 
             <div class="stars">
                 <font-awesome-icon v-for="(star,index) in film.vote_average" :key="index" icon="fa-solid fa-star" />
-                <font-awesome-icon v-for="(star,index) in film.vote_average" :key="index" icon="fa-solid fa-star" />
             </div>
 
             <div class="col">
