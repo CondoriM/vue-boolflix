@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <HeadSite/>
-    <form @submit.prevent="search">
+    <form @submit.prevent="searchAll">
       <input type="text" v-model="searchT">
       <button type="submit">Invia</button>
       <div class="container">
@@ -14,8 +14,26 @@
             <div class="col">
               {{film.original_title}}
               {{film.title}}
-              {{film.original_language}}
+              <div>
+                {{film.original_language}} 
+                <img :src="'https://flagcdn.com/w20/'+ film.original_language +'.png'" alt="">
+              </div>
               {{film.vote_average}}
+            </div>
+          </div>
+
+          <div class="col-2 flex-column" v-for="serie in series" :key="serie.id">
+            <div class="col">
+              <img class="img-fluid" :src="cover+serie.poster_path" alt="">
+            </div>
+
+            <div class="col">
+              {{serie.name}}
+              <div>
+                {{serie.original_language}} 
+                <img :src="'https://flagcdn.com/w20/'+ serie.original_language +'.png'" alt="">
+              </div>
+              {{serie.vote_average}}
             </div>
           </div>
         </div>
@@ -40,18 +58,39 @@ export default {
     return{
       searchT: '',
       films: '',
+      series: '',
+      flags: '',
+
       cover: 'https://image.tmdb.org/t/p/original',
       apy_key: '626f23522e216489e48887e2688ac97f',
     }
   },
 
   methods:{
-    search(){
+    searchAll(){
+      this.searchFilms()
+      this.searchSeries()
+      this.flag()
+    },
+
+    searchFilms(){
       axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.apy_key}&language=it-IT&page=1&include_adult=false&query=${this.searchT}`).then(response =>{
       this.films = response.data.results
-      console.log(this);
       console.log(this.films);
-    })
+      })
+    },
+
+    searchSeries(){
+      axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${this.apy_key}&language=it_IT&query=${this.searchT}`).then(response =>{
+      this.series = response.data.results
+      })
+    },
+
+    flag(){
+      axios.get(`https://flagcdn.com/it/codes.json`).then(response =>{
+      this.flags = response.data
+      console.log(this.flags,'ciao');
+      })
     }
   },
 }
