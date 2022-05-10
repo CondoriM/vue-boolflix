@@ -57,11 +57,11 @@ export default {
   data(){
     return{
       searchT: '',
-      films: '',
-      series: '',
+      films: [],
+      series: [],
       flags: '',
 
-      cover: 'https://image.tmdb.org/t/p/original',
+      cover: 'https://image.tmdb.org/t/p/w342',
       apy_key: '626f23522e216489e48887e2688ac97f',
     }
   },
@@ -76,22 +76,27 @@ export default {
     searchFilms(){
       axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.apy_key}&language=it-IT&page=1&include_adult=false&query=${this.searchT}`).then(response =>{
       this.films = response.data.results
-      console.log(this.films);
+      this.films.forEach(film => {
+        film.vote_average = film.vote_average / 2
+      });
       })
     },
 
     searchSeries(){
       axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${this.apy_key}&language=it_IT&query=${this.searchT}`).then(response =>{
       this.series = response.data.results
+      this.series.forEach(serie => {
+        serie.vote_average = serie.vote_average / 2
+      });
       })
     },
 
     flag(){
       axios.get(`https://flagcdn.com/it/codes.json`).then(response =>{
       this.flags = response.data
-      console.log(this.flags,'ciao');
+      //console.log(this.flags,'ciao');
       })
-    }
+    },
   },
 }
 </script>
