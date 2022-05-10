@@ -11,6 +11,11 @@
               <img class="img-fluid" :src="cover+film.poster_path" alt="">
             </div>
 
+            <div class="stars">
+                <font-awesome-icon v-for="(star,index) in film.vote_average" :key="index" icon="fa-solid fa-star" />
+                <font-awesome-icon v-for="(star,index) in film.vote_average" :key="index" icon="fa-solid fa-star" />
+            </div>
+
             <div class="col">
               {{film.original_title}}
               {{film.title}}
@@ -25,6 +30,10 @@
           <div class="col-2 flex-column" v-for="serie in series" :key="serie.id">
             <div class="col">
               <img class="img-fluid" :src="cover+serie.poster_path" alt="">
+            </div>
+
+            <div class="stars">
+                <font-awesome-icon v-for="(star,index) in serie.vote_average" :key="index" icon="fa-solid fa-star" />
             </div>
 
             <div class="col">
@@ -77,7 +86,7 @@ export default {
       axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.apy_key}&language=it-IT&page=1&include_adult=false&query=${this.searchT}`).then(response =>{
       this.films = response.data.results
       this.films.forEach(film => {
-        film.vote_average = film.vote_average / 2
+        film.vote_average = Math.floor(film.vote_average / 2) 
       });
       })
     },
@@ -86,7 +95,7 @@ export default {
       axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${this.apy_key}&language=it_IT&query=${this.searchT}`).then(response =>{
       this.series = response.data.results
       this.series.forEach(serie => {
-        serie.vote_average = serie.vote_average / 2
+        serie.vote_average = Math.floor(serie.vote_average / 2)
       });
       })
     },
@@ -97,6 +106,22 @@ export default {
       //console.log(this.flags,'ciao');
       })
     },
+
+    star(f){
+      if (f.vote_average <= 1 && f.vote_average != 0) {
+        return 4
+      }if(f.vote_average > 1 && f.vote_average <= 2){
+        return 3
+      }if(f.vote_average > 2 && f.vote_average <= 3){
+        return 2
+      }if(f.vote_average > 3 && f.vote_average <= 4){
+        return 1
+      }if(f.vote_average > 4 && f.vote_average <= 5){
+        return 0
+      }if(f.vote_average == 0){
+        return 5
+      }
+    }
   },
 }
 </script>
