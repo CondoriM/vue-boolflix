@@ -1,0 +1,24 @@
+.inline{
+    display: inline-block;
+    max-width: 342px;
+    max-height: 513px;
+
+    .img_holder:empty{
+        min-width: 342px;
+        min-height: 513px;
+        background-color: grey;
+    }
+}
+
+.rel{
+    position: relative;
+
+    .info{
+        position: absolute;
+        top: 0;
+        padding: 1rem;
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll;
+    }
+}

@@ -1,7 +1,7 @@
 <template>
     <div class="inline rel" @mouseover="hovM = true" @mouseleave="hovM = false">
 
-        <img class="img-fluid rounded" :src="cover+film.poster_path" alt="">
+        <img class="img-fluid rounded img_holder" :src="cover+film.poster_path" alt="">
 
         <div v-show="hovM" class="info bg-dark rounded text-start rounded">
             
@@ -44,22 +44,6 @@ export default {
 
 <style lang="scss" scoped>
 
-.inline{
-    display: inline-block;
-    max-width: 342px;
-
-}
-.rel{
-    position: relative;
-
-    .info{
-        position: absolute;
-        top: 0;
-        padding: 1rem;
-        width: 100%;
-        height: 100%;
-        overflow-y: scroll;
-    }
-}
+@import '@/assets/scss/variable.scss';
 
 </style>
