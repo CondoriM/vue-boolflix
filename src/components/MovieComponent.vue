@@ -1,22 +1,26 @@
 <template>
-    <div class="inline rel">
+    <div class="inline rel" @mouseover="hovM = true" @mouseleave="hovM = false">
 
         <img class="img-fluid rounded" :src="cover+film.poster_path" alt="">
 
-        <div class="info">
-            <div class="stars">
-                <font-awesome-icon v-for="(star,index) in film.vote_average" :key="index + film.vote_average" icon="fa-solid fa-star" />
-                <font-awesome-icon v-for="(starN,index) in 5 - film.vote_average" :key="index - film.vote_average" icon="fa-regular fa-star" />
-            </div>
-
+        <div v-show="hovM" class="info bg-dark rounded text-start rounded">
+            
+            <!-- sezione info -->
             <div class="">
-                {{film.original_title}}
-                {{film.title}}
+                <span>Titolo:{{film.name}}</span><br>
+                <span>Titolo Originale:{{film.original_name}}</span>
                 <div>
                     {{film.original_language}} 
                     <img :src="'https://flagcdn.com/w20/'+ film.original_language +'.png'" alt="">
                 </div>
-                {{film.vote_average}}
+            </div>
+
+            <!-- sezione stelle -->
+            <div class="stars">
+                <font-awesome-icon v-for="(star,index) in film.vote_average" :key="index + film.vote_average" icon="fa-solid fa-star" />
+                <font-awesome-icon v-for="(starN,index) in 5 - film.vote_average" :key="index - film.vote_average" icon="fa-regular fa-star" /><br>
+
+                <span>Overview:{{film.overview}}</span>
             </div>
         </div>     
     </div>
@@ -32,6 +36,7 @@ export default {
     data(){
         return{
             cover: 'https://image.tmdb.org/t/p/w342',
+            hovM: false
         }
     }
 }
@@ -41,15 +46,19 @@ export default {
 
 .inline{
     display: inline-block;
+    max-width: 342px;
 
 }
 .rel{
     position: relative;
 
     .info{
-        display: none;
         position: absolute;
-        top: 0
+        top: 0;
+        padding: 1rem;
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll;
     }
 }
 

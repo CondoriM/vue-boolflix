@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col text-center">
           <MovieComp class="m-2" :film="film" v-for="(film,index) in films" :key="index"></MovieComp>
-          <SerieComp :serie="serie" v-for="serie in series" :key="serie.id"></SerieComp>
+          <SerieComp class="m-2" :serie="serie" v-for="serie in series" :key="serie.id"></SerieComp>
         </div>
       </div>
     </div>
@@ -100,5 +100,6 @@ export default {
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
+  color: white;
 }
 </style>
