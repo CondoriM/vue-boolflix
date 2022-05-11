@@ -3,15 +3,15 @@
         <form @submit.prevent="searchAll">
             <input type="text" v-model="searchT">
             <button type="submit">Invia</button>
-            <div class="container">
-                <div class="row">
-
-                    <MovieComp :film="film" class="col-2 flex-column" v-for="(film,index) in films" :key="index"></MovieComp>
-                    <SerieComp :serie="serie" class="col-2 flex-column" v-for="serie in series" :key="serie.id"></SerieComp>
-                    
-                </div>
-            </div>
         </form>
+        <div class="container">
+            <div class="row">
+    
+                <MovieComp :film="film" class="col-2 flex-column" v-for="(film,index) in films" :key="index"></MovieComp>
+                <SerieComp :serie="serie" class="col-2 flex-column" v-for="serie in series" :key="serie.id"></SerieComp>
+                
+            </div>
+        </div>
     </div>
 </template>
 

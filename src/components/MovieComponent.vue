@@ -5,7 +5,8 @@
         </div>
 
         <div class="stars">
-            <font-awesome-icon v-for="(star,index) in film.vote_average" :key="index" icon="fa-solid fa-star" />
+            <font-awesome-icon v-for="(star,index) in film.vote_average" :key="index + film.vote_average" icon="fa-solid fa-star" />
+            <font-awesome-icon v-for="(starN,index) in 5 - film.vote_average" :key="index - film.vote_average" icon="fa-regular fa-star" />
         </div>
 
         <div class="col">

@@ -6,11 +6,13 @@
             </div>
 
             <div class="col">
-                <input
-                    type="text"
-                    :value="search"
-                    @input="$emit('update:search', $event.target.value)"
-                />
+                <form @submit.prevent="$emit('formSubmit')">
+                    <input type="text" :value="searchT"
+                    v-on:input="$emit('input', $event.target.value)"
+                    />
+
+                    <button type="submit">Invia</button>
+                </form>
             </div>
         </div>
     </div>
@@ -19,7 +21,8 @@
 <script>
 export default{
     name:'HeadSite',
-    props: ['search'],
-    emits: ['update:search']
+    props: {
+        searchT: String
+    },
 }
 </script>

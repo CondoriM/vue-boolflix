@@ -1,12 +1,13 @@
 <template>
   <div id="app">
-    <HeadSite/>
+    <HeadSite v-model="searchT" @formSubmit="state"></HeadSite>
     <MainSite/>
   </div>
 </template>
 
 <script>
 // import axios from "axios";
+import state from '@/state';
 import HeadSite from '@/components/HeadComponent.vue';
 import MainSite from '@/components/MainComponent.vue'
 
@@ -16,6 +17,20 @@ export default {
     HeadSite,
     MainSite
   },
+
+  data(){
+    return{
+      searchT:''
+    }
+  },
+
+  methods:{
+    state(){
+      console.log('ricerca');
+      state.searchT = this.searchT
+      //console.log(state);
+    }
+  }
 
   // data(){
   //   return{
